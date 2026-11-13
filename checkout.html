@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cash on Delivery Checkout — The Modest Edit Pakistan</title>
+  <meta name="description" content="Secure Cash on Delivery checkout for abaya online pakistan, original vitamin c serums, hair serums &amp; hijab sets. Free delivery over Rs. 3,000 across Karachi, Lahore, Islamabad &amp; Hyderabad.">
+  <meta name="keywords" content="abaya online pakistan, cash on delivery checkout pakistan, vitamin c serum pakistan, hair serum pakistan, modest wear checkout">
+  <link rel="canonical" href="https://themodestedit.pk/checkout.html">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="Cash on Delivery Checkout — The Modest Edit Pakistan">
+  <meta property="og:description" content="Fast, secure Cash on Delivery checkout across Pakistan. Free delivery over Rs. 3,000.">
+  <meta property="og:type" content="website">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/shop.css">
+</head>
+<body>
+
+  <!-- Top Announcement Bar -->
+  <div class="announcement-bar" role="region" aria-label="Announcement">
+    <span>Free Express Nationwide Delivery across Hyderabad, Karachi, Lahore &amp; Islamabad on orders over <strong>Rs. 3,000</strong> &bull; Cash on Delivery Available 🇵🇰</span>
+  </div>
+
+  <!-- Sticky Header -->
+  <header class="site-header" id="siteHeader">
+    <div class="container nav-container">
+      <a href="index.html" class="site-logo" aria-label="The Modest Edit Home">
+        <span class="logo-title">The Modest Edit</span>
+        <span class="logo-tagline">Modest &bull; Modern &bull; Mine</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Primary Navigation">
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="shop.html" class="nav-link">Shop</a></li>
+          <li><a href="shop.html?category=Winter%20Collection" class="nav-link">Winter Edit</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="cart.html" class="nav-cart-btn" aria-label="View Shopping Cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span class="cart-badge" id="navCartCount" data-cart-count>0</span>
+        </a>
+
+        <button type="button" class="mobile-toggle-btn" aria-label="Toggle navigation menu" aria-expanded="false">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-backdrop"></div>
+  <aside class="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-drawer-header">
+      <span class="logo-title" style="font-size: 1.3rem;">The Modest Edit</span>
+      <button type="button" class="mobile-close-btn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="index.html" class="mobile-nav-link">Home</a></li>
+      <li><a href="shop.html" class="mobile-nav-link">Shop Catalog</a></li>
+      <li><a href="shop.html?category=Winter%20Collection" class="mobile-nav-link">Winter Edit ❄️</a></li>
+      <li><a href="about.html" class="mobile-nav-link">Our Story &amp; Philosophy</a></li>
+      <li><a href="contact.html" class="mobile-nav-link">Contact &amp; Concierge</a></li>
+      <li><a href="cart.html" class="mobile-nav-link">Shopping Bag (<span data-cart-count>0</span>)</a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <p>Hyderabad, Sindh, Pakistan &bull; Cash on Delivery</p>
+      <p style="font-size: 0.78rem; margin-top: 0.25rem;">WhatsApp: +92 316 8465697</p>
+    </div>
+  </aside>
+
+  <main>
+    <div class="container" id="checkoutContainer">
+      <div class="checkout-hero-header">
+        <span class="section-tag">Express Doorstep Dispatch</span>
+        <h1 class="page-hero-title">Cash on Delivery Checkout</h1>
+        <span class="gold-accent-line"></span>
+        <p class="section-subtitle">
+          Please enter your shipping address details. No online credit card needed &mdash; simply pay cash when our courier delivers to your home.
+        </p>
+      </div>
+
+      <div class="checkout-grid-layout">
+        <!-- Left: Checkout Form -->
+        <div class="checkout-form-column">
+          <form id="checkoutForm" novalidate>
+            <!-- 1. Customer Information Box -->
+            <div class="checkout-box">
+              <h2 class="checkout-section-title">
+                <span>1. Contact &amp; Recipient Info</span>
+              </h2>
+
+              <div class="form-group">
+                <label for="fullName">Full Name <span class="required-star">*</span></label>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  class="form-control" 
+                  placeholder="e.g. Kabir" 
+                  required
+                />
+                <span class="error-message d-none" id="fullNameError"></span>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="emailAddress">Email Address <span class="required-star">*</span></label>
+                  <input 
+                    type="email" 
+                    id="emailAddress" 
+                    class="form-control" 
+                    placeholder="gkabeersoomro@gmail.com" 
+                    required
+                  />
+                  <div class="input-helper-text">For your order invoice &amp; dispatch tracking</div>
+                  <span class="error-message d-none" id="emailAddressError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phoneNumber">Mobile Number (Pakistan) <span class="required-star">*</span></label>
+                  <input 
+                    type="tel" 
+                    id="phoneNumber" 
+                    class="form-control" 
+                    placeholder="0316-8465697" 
+                    required
+                  />
+                  <div class="input-helper-text">Courier rider calls before delivery</div>
+                  <span class="error-message d-none" id="phoneNumberError"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. Shipping Address Box -->
+            <div class="checkout-box">
+              <h2 class="checkout-section-title">
+                <span>2. Delivery Address</span>
+              </h2>
+
+              <div class="form-group">
+                <label for="streetAddress">Street Address / House No. / Flat <span class="required-star">*</span></label>
+                <input 
+                  type="text" 
+                  id="streetAddress" 
+                  class="form-control" 
+                  placeholder="e.g. Bungalow #14, Citizen Colony, Hyderabad, Sindh" 
+                  required
+                />
+                <span class="error-message d-none" id="streetAddressError"></span>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-group">
+                  <label for="citySelect">Destination City <span class="required-star">*</span></label>
+                  <select id="citySelect" class="form-control" required>
+                    <option value="" disabled>Select your city...</option>
+                    <option value="Hyderabad" selected>Hyderabad (Sindh)</option>
+                    <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Rawalpindi">Rawalpindi</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Sukkur">Sukkur</option>
+                    <option value="Multan">Multan</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Quetta">Quetta</option>
+                    <option value="Sialkot">Sialkot</option>
+                    <option value="Gujranwala">Gujranwala</option>
+                    <option value="Other City">Other City in Pakistan</option>
+                  </select>
+                  <span class="error-message d-none" id="citySelectError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="postalCode">Postal Code (Optional)</label>
+                  <input 
+                    type="text" 
+                    id="postalCode" 
+                    class="form-control" 
+                    placeholder="e.g. 54000"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="orderNotes">Delivery Instructions / Notes (Optional)</label>
+                <textarea 
+                  id="orderNotes" 
+                  class="form-control" 
+                  rows="2" 
+                  placeholder="e.g., Please call before arriving or deliver between 2 PM - 6 PM"
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- 3. Payment Method Box -->
+            <div class="checkout-box">
+              <h2 class="checkout-section-title">
+                <span>3. Payment Method</span>
+              </h2>
+
+              <div class="payment-methods-stack">
+                <!-- COD Option: Active -->
+                <label class="payment-method-card is-active">
+                  <div class="payment-card-left">
+                    <input type="radio" name="paymentOption" value="cod" checked>
+                    <div>
+                      <div class="payment-card-title">Cash on Delivery (COD)</div>
+                      <div class="payment-card-subtext">Pay in cash when rider hands over your parcel</div>
+                    </div>
+                  </div>
+                  <span class="badge-cod-popular">Enabled</span>
+                </label>
+
+                <!-- Debit/Credit Card: Disabled -->
+                <div class="payment-method-card is-disabled" title="Card payments coming soon across Pakistan">
+                  <div class="payment-card-left">
+                    <input type="radio" name="paymentOption" value="card" disabled>
+                    <div>
+                      <div class="payment-card-title">Debit / Credit Card</div>
+                      <div class="payment-card-subtext">Visa, MasterCard, PayPak</div>
+                    </div>
+                  </div>
+                  <span class="badge-coming-soon">Coming Soon</span>
+                </div>
+
+                <!-- JazzCash / EasyPaisa: Disabled -->
+                <div class="payment-method-card is-disabled" title="Mobile wallets coming soon">
+                  <div class="payment-card-left">
+                    <input type="radio" name="paymentOption" value="wallet" disabled>
+                    <div>
+                      <div class="payment-card-title">JazzCash / EasyPaisa</div>
+                      <div class="payment-card-subtext">Direct wallet transfer</div>
+                    </div>
+                  </div>
+                  <span class="badge-coming-soon">Coming Soon</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block" id="btnPlaceOrder" style="height: 54px; font-size: 1.05rem; font-weight: 600;">
+              <span>Place Order (Cash on Delivery)</span>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Order Summary Sidebar -->
+        <aside class="checkout-summary-column">
+          <div class="summary-card">
+            <h2 class="summary-card-title">Order Items</h2>
+
+            <!-- Dynamic Items List -->
+            <div class="checkout-items-list" id="checkoutItemsList">
+              <!-- Rendered by js/checkout.js -->
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span id="checkoutSubtotal" class="summary-val">Rs. 0</span>
+            </div>
+
+            <div class="summary-row">
+              <span>Shipping Fee</span>
+              <span id="checkoutShipping" class="summary-val">Rs. 0</span>
+            </div>
+
+            <div class="summary-row summary-row-total">
+              <span>Total Payable</span>
+              <span id="checkoutTotal" class="summary-total-val">Rs. 0</span>
+            </div>
+
+            <p class="summary-tax-note">You will pay this exact total upon delivery. No hidden rider charges.</p>
+
+            <div class="summary-security-badges">
+              <div class="security-badge-item">
+                <span>🚚</span> <strong>Fast Dispatch:</strong> 2–4 business days via TCS / Trax
+              </div>
+              <div class="security-badge-item">
+                <span>📦</span> <strong>Discreet &amp; Sealed:</strong> Tamper-proof luxury packaging
+              </div>
+              <div class="security-badge-item">
+                <span>🔄</span> <strong>Exchange Friendly:</strong> 7 days return window
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Full-Screen Order Confirmation Modal -->
+  <div class="order-modal-backdrop" id="orderSuccessModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="order-modal-window" id="orderModalDetails">
+      <!-- Injected by js/checkout.js upon successful validation -->
+    </div>
+  </div>
+
+  <!-- Global Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <span class="logo-title">The Modest Edit</span>
+          <span class="logo-tagline">Modest &bull; Modern &bull; Mine</span>
+          <p class="footer-desc">
+            Pakistan's bespoke online sanctuary for modern modest wear, breathable everyday hijabs, and barrier-repair skincare. Curated in Lahore for women across Pakistan.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Shop The Edit</h4>
+          <ul class="footer-links">
+            <li><a href="shop.html?category=Modest%20Fashion">Abayas &amp; Kimonos</a></li>
+            <li><a href="shop.html?category=Winter%20Collection">Winter Collection</a></li>
+            <li><a href="shop.html?category=Skincare%20Essentials">Acne &amp; Barrier Skincare</a></li>
+            <li><a href="shop.html?category=Haircare%20%26%20Shampoos">Botanical Shampoos</a></li>
+            <li><a href="shop.html?category=Makeup%20%26%20Beauty">Makeup &amp; Beauty</a></li>
+            <li><a href="shop.html?category=Accessories%20%26%20Hijabs">No-Pin Hijabs</a></li>
+            <li><a href="shop.html">All 106 Products</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">The Brand</h4>
+          <ul class="footer-links">
+            <li><a href="about.html">Our Story &amp; Philosophy</a></li>
+            <li><a href="marketing.html">Marketing &amp; Growth Blueprint</a></li>
+            <li><a href="contact.html">Customer Care &amp; FAQs</a></li>
+            <li><a href="cart.html">View Shopping Bag</a></li>
+            <li><a href="checkout.html">Cash on Delivery Policy</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-heading">Studio &amp; Dispatch Hub</h4>
+          <p style="font-size: 0.88rem; color: #A8A096; line-height: 1.6; margin-bottom: 0.75rem;">
+            Hyderabad, Sindh, Pakistan<br>
+            Mon &ndash; Sat: 10:00 AM &ndash; 8:00 PM PKT
+          </p>
+          <p style="font-size: 0.88rem; color: #A8A096;">
+            <strong>WhatsApp / Call:</strong> +92 316 8465697<br>
+            <strong>Email:</strong> gkabeersoomro@gmail.com
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; <span class="current-year">2026</span> <strong>The Modest Edit</strong>. Designed &amp; Developed by Kabir &bull; Pakistan.
+        </div>
+        <div>
+          Currency: <strong>PKR (Rs.)</strong> &bull; Nationwide Delivery: Hyderabad &bull; Karachi &bull; Lahore &bull; Islamabad
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

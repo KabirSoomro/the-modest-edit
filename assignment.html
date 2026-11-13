@@ -1,0 +1,1369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>University Assignment Report — The Modest Edit | Ghulam Kabir (2k23/CSM/40)</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       CSS Variables & Global Styles
+       ========================================================================== */
+    :root {
+      --primary: #8B6F47;
+      --primary-dark: #6E5534;
+      --secondary: #A3B18A;
+      --accent-gold: #C9A961;
+      --text-charcoal: #2D2D2D;
+      --text-muted: #5A5A5A;
+      --border-color: #D9D2C7;
+      --border-light: #EBE6DF;
+      --bg-cream: #FAF7F2;
+      --bg-card: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-charcoal);
+      background: #E8E5DF;
+      line-height: 1.65;
+      font-size: 10.5pt;
+      -webkit-font-smoothing: antialiased;
+      padding: 30px 15px;
+    }
+
+    /* Fixed Download Button (Screen Only) */
+    .btn-print-fixed {
+      position: fixed;
+      top: 24px;
+      right: 28px;
+      z-index: 99999;
+      background: var(--primary);
+      color: #FFFFFF;
+      border: none;
+      padding: 14px 26px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(139, 111, 71, 0.35);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.25s ease;
+    }
+
+    .btn-print-fixed:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(139, 111, 71, 0.45);
+    }
+
+    .btn-print-fixed svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+    }
+
+    /* Report Paper Container */
+    .report-container {
+      max-width: 860px;
+      margin: 0 auto;
+      background: #FFFFFF;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .page {
+      padding: 55px 65px;
+      background: #FFFFFF;
+    }
+
+    /* ==========================================================================
+       Cover Page Styling (Page 1)
+       ========================================================================== */
+    .cover-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 12px solid var(--border-light);
+      padding: 70px 55px;
+      text-align: center;
+      background: radial-gradient(circle at 50% 15%, #FAF7F2 0%, #FFFFFF 70%);
+      page-break-after: always;
+      break-after: page;
+    }
+
+    .cover-header .uni-badge {
+      display: inline-block;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      font-weight: 700;
+      color: var(--primary);
+      background: #F4EFE6;
+      padding: 6px 18px;
+      border-radius: 30px;
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .cover-header .uni-title {
+      font-family: var(--font-serif);
+      font-size: 26pt;
+      font-weight: 800;
+      color: var(--text-charcoal);
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .cover-header .dept-title {
+      font-size: 12pt;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 600;
+    }
+
+    .cover-divider {
+      width: 80px;
+      height: 3px;
+      background: var(--accent-gold);
+      margin: 30px auto;
+      border-radius: 2px;
+    }
+
+    .cover-body .subject-tag {
+      font-size: 11pt;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .cover-body .assignment-title {
+      font-family: var(--font-serif);
+      font-size: 28pt;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--text-charcoal);
+      margin-bottom: 16px;
+    }
+
+    .cover-body .store-badge {
+      font-family: var(--font-serif);
+      font-size: 18pt;
+      font-style: italic;
+      color: var(--primary-dark);
+      margin-bottom: 10px;
+    }
+
+    .cover-body .store-tagline {
+      font-size: 11pt;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    .cover-footer {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid var(--border-color);
+      text-align: left;
+    }
+
+    .meta-box h4 {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--primary);
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .meta-box p {
+      font-size: 11pt;
+      color: var(--text-charcoal);
+      line-height: 1.6;
+    }
+
+    .meta-box strong {
+      color: #111111;
+    }
+
+    .cover-date-bar {
+      margin-top: 25px;
+      padding-top: 15px;
+      border-top: 1px dashed var(--border-color);
+      font-size: 10pt;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* ==========================================================================
+       Report Body & Content Pages (Page 2+)
+       ========================================================================== */
+    .report-body-page {
+      padding: 60px 65px;
+      background: #FFFFFF;
+    }
+
+    .section-block {
+      margin-bottom: 38px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .section-header {
+      margin-bottom: 16px;
+      border-bottom: 2px solid var(--border-light);
+      padding-bottom: 10px;
+    }
+
+    .section-num {
+      font-size: 10pt;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--primary);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: var(--font-serif);
+      font-size: 18pt;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      letter-spacing: -0.01em;
+    }
+
+    .lead-paragraph {
+      font-size: 10.5pt;
+      line-height: 1.7;
+      color: #333333;
+      margin-bottom: 14px;
+      text-align: justify;
+    }
+
+    /* Highlight Key Details Box */
+    .info-summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      background: var(--bg-cream);
+      padding: 16px 20px;
+      border-radius: 6px;
+      border-left: 4px solid var(--primary);
+      margin: 16px 0 20px 0;
+    }
+
+    .info-summary-item h5 {
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--primary-dark);
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .info-summary-item p {
+      font-size: 10pt;
+      color: var(--text-charcoal);
+      font-weight: 500;
+      line-height: 1.4;
+    }
+
+    /* ==========================================================================
+       Empty Dashed Image Placeholder Boxes (Red Text) + Interactive Upload
+       ========================================================================== */
+    .image-placeholder-box {
+      border: 2px dashed #D9383A;
+      background: #FFF8F8;
+      color: #D9383A;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-weight: 600;
+      border-radius: 6px;
+      margin: 18px 0;
+      padding: 24px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      position: relative;
+    }
+
+    .image-placeholder-box:hover {
+      background: #FFEDED;
+    }
+
+    .image-placeholder-box:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(139, 111, 71, 0.25);
+    }
+
+    .image-placeholder-box.drag-over {
+      border-color: var(--primary) !important;
+      background: #F4EFE6 !important;
+      color: var(--primary) !important;
+    }
+
+    .image-placeholder-box .ph-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .image-placeholder-box .ph-icon {
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .image-placeholder-box .ph-title {
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 4px;
+    }
+
+    .image-placeholder-box .ph-subtitle {
+      font-size: 9pt;
+      font-weight: 500;
+      opacity: 0.85;
+      max-width: 620px;
+      line-height: 1.4;
+    }
+
+    .image-placeholder-box .ph-upload-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 7px 18px;
+      background: #FFFFFF;
+      border: 1.5px solid #D9383A;
+      border-radius: 30px;
+      color: #D9383A;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(217, 56, 58, 0.1);
+    }
+
+    .image-placeholder-box .ph-upload-cta:hover {
+      background: #D9383A;
+      color: #FFFFFF;
+      transform: translateY(-1px);
+    }
+
+    /* Uploaded Image Active State */
+    .image-placeholder-box.has-image {
+      border: 1px solid var(--border-color);
+      background: #FFFFFF;
+      padding: 12px;
+      cursor: default;
+      min-height: auto;
+    }
+
+    .image-placeholder-box.has-image:hover {
+      background: #FFFFFF;
+    }
+
+    .image-placeholder-box .figure-rendered {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-placeholder-box .figure-img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: contain;
+      border-radius: 4px;
+      border: 1px solid #E5DFD7;
+      background: #FAF7F2;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+    }
+
+    .image-placeholder-box .figure-caption {
+      font-family: var(--font-serif);
+      font-size: 10.5pt;
+      font-style: italic;
+      color: var(--text-charcoal);
+      margin-top: 10px;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+
+    .image-placeholder-box .figure-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .image-placeholder-box .figure-btn {
+      background: #F4EFE6;
+      border: 1px solid var(--border-color);
+      color: var(--text-charcoal);
+      padding: 5px 14px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .image-placeholder-box .figure-btn:hover {
+      background: var(--primary);
+      color: #FFFFFF;
+      border-color: var(--primary);
+    }
+
+    .image-placeholder-box .figure-btn.btn-remove {
+      color: #D9383A;
+      border-color: #F8D7DA;
+      background: #FFF5F5;
+    }
+
+    .image-placeholder-box .figure-btn.btn-remove:hover {
+      background: #D9383A;
+      color: #FFFFFF;
+      border-color: #D9383A;
+    }
+
+    /* Ubersuggest Triple Placeholder Grid */
+    .triple-placeholder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 18px 0;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .triple-placeholder-grid .image-placeholder-box {
+      min-height: 140px;
+      margin: 0;
+      padding: 16px 12px;
+    }
+
+    .triple-placeholder-grid .ph-title {
+      font-size: 9.5pt;
+    }
+
+    .triple-placeholder-grid .image-placeholder-box.has-image .figure-img {
+      max-height: 220px;
+    }
+
+    .triple-placeholder-grid .image-placeholder-box.has-image .figure-caption {
+      font-size: 9pt;
+    }
+
+    /* ==========================================================================
+       Tables (Bordered, Clean, Publication-Ready)
+       ========================================================================== */
+    .table-container {
+      width: 100%;
+      margin: 16px 0 20px 0;
+      overflow-x: auto;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+      text-align: left;
+      border: 1px solid var(--border-color);
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .data-table th {
+      background: #F4EFE6;
+      color: var(--text-charcoal);
+      font-weight: 700;
+      padding: 10px 14px;
+      border: 1px solid var(--border-color);
+      font-size: 9pt;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .data-table td {
+      padding: 9px 14px;
+      border: 1px solid var(--border-color);
+      color: #333333;
+      vertical-align: top;
+    }
+
+    .data-table tbody tr:nth-child(even) {
+      background: #FAF8F5;
+    }
+
+    .data-table tbody tr:hover {
+      background: #F2ECE1;
+    }
+
+    .price-cell {
+      font-weight: 600;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .category-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 8pt;
+      font-weight: 600;
+      background: #EFE9DF;
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .badge-commercial {
+      background: #E7EDDF;
+      color: #3B5B28;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 8pt;
+    }
+
+    .badge-transactional {
+      background: #DFE8F4;
+      color: #264A7F;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 8pt;
+    }
+
+    /* ==========================================================================
+       Formula & Financial Cards
+       ========================================================================== */
+    .formula-banner {
+      background: #F4EFE6;
+      border-left: 4px solid var(--accent-gold);
+      padding: 14px 20px;
+      border-radius: 4px;
+      margin: 14px 0 18px 0;
+      text-align: center;
+      font-family: var(--font-serif);
+      font-size: 13pt;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      letter-spacing: 0.02em;
+    }
+
+    .financial-projections-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .financial-card {
+      background: #FAF8F5;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 18px;
+    }
+
+    .financial-card.highlight {
+      border: 2px solid var(--primary);
+      background: #FFFFFF;
+    }
+
+    .financial-card .stage-tag {
+      font-size: 8.5pt;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+
+    .financial-card .rev-amount {
+      font-family: var(--font-serif);
+      font-size: 18pt;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin-bottom: 8px;
+    }
+
+    .financial-card .calc-line {
+      font-size: 9.5pt;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* ==========================================================================
+       KPI Cards (Section 7)
+       ========================================================================== */
+    .kpi-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      margin: 16px 0;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .kpi-card-box {
+      border: 1px solid var(--border-color);
+      background: #FAF8F5;
+      border-radius: 6px;
+      padding: 16px 18px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .kpi-card-box .kpi-num {
+      font-size: 9pt;
+      font-weight: 700;
+      color: var(--accent-gold);
+      margin-bottom: 4px;
+    }
+
+    .kpi-card-box .kpi-heading {
+      font-family: var(--font-serif);
+      font-size: 12pt;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin-bottom: 6px;
+    }
+
+    .kpi-card-box .kpi-details {
+      font-size: 9pt;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Page Break Utilities */
+    .page-break {
+      page-break-after: always;
+      break-after: page;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+
+    /* ==========================================================================
+       PRINT MEDIA QUERY (Clean A4 PDF Export)
+       ========================================================================== */
+    @media print {
+      @page {
+        size: A4 portrait;
+        margin: 15mm 15mm 18mm 15mm;
+      }
+
+      body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+        font-size: 10pt !important;
+        color: #111111 !important;
+      }
+
+      .btn-print-fixed {
+        display: none !important;
+      }
+
+      .report-container {
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+      }
+
+      .cover-page {
+        min-height: 100vh !important;
+        border: 4px double #8B6F47 !important;
+        padding: 50px 40px !important;
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      .report-body-page {
+        padding: 20px 0 !important;
+      }
+
+      .section-block {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-bottom: 26px !important;
+      }
+
+      .image-placeholder-box {
+        border: 2px dashed #D9383A !important;
+        background: #FFF5F5 !important;
+        color: #D9383A !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .image-placeholder-box.has-image {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 12px 0 !important;
+        min-height: auto !important;
+      }
+
+      .image-placeholder-box.has-image .figure-img {
+        max-height: 400px !important;
+        border: 1px solid #D5C7B5 !important;
+        box-shadow: none !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .triple-placeholder-grid .image-placeholder-box.has-image .figure-img {
+        max-height: 190px !important;
+      }
+
+      .image-placeholder-box.has-image .figure-caption {
+        color: #2D2D2D !important;
+        font-size: 9.5pt !important;
+        margin-top: 6px !important;
+      }
+
+      .figure-actions,
+      .ph-upload-cta,
+      .ph-file-input {
+        display: none !important;
+      }
+
+      .data-table th {
+        background: #F4EFE6 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .data-table tbody tr:nth-child(even) {
+        background: #FAF8F5 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .formula-banner {
+        background: #F4EFE6 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+
+      .page-break {
+        page-break-after: always !important;
+        break-after: page !important;
+      }
+
+      a {
+        text-decoration: none !important;
+        color: inherit !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fixed Print to PDF Floating Button -->
+  <button type="button" class="btn-print-fixed" onclick="window.print()" title="Open browser print dialog to save as PDF">
+    <svg viewBox="0 0 24 24">
+      <path d="M6 9V2h12v7"></path>
+      <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path>
+      <rect x="6" y="14" width="12" height="8"></rect>
+    </svg>
+    <span>Download / Print as PDF</span>
+  </button>
+
+  <!-- Main Report Wrapper -->
+  <main class="report-container">
+
+    <!-- ==========================================================================
+         COVER PAGE (PAGE 1)
+         ========================================================================== -->
+    <article class="cover-page">
+      <div class="cover-header">
+        <span class="uni-badge">Academic Submission &bull; Final Course Project</span>
+        <h1 class="uni-title">University of Sindh</h1>
+        <p class="dept-title">Department of Computer Science &bull; Faculty of Natural Sciences</p>
+        <div class="cover-divider"></div>
+      </div>
+
+      <div class="cover-body">
+        <div class="subject-tag">Subject: E-Commerce</div>
+        <h2 class="assignment-title">E-Commerce Store Development &amp; Marketing Plan</h2>
+        <div class="store-badge">The Modest Edit</div>
+        <p class="store-tagline">&ldquo;Modest. Modern. Mine.&rdquo; &bull; A Custom Vanilla Web Platform</p>
+      </div>
+
+      <div>
+        <div class="cover-footer">
+          <div class="meta-box">
+            <h4>Submitted By:</h4>
+            <p>
+              <strong>Name:</strong> Ghulam Kabir<br>
+              <strong>Roll Number:</strong> 2k23/CSM/40<br>
+              <strong>Class:</strong> BS Computer Science (Morning)
+            </p>
+          </div>
+
+          <div class="meta-box">
+            <h4>Submitted To:</h4>
+            <p>
+              <strong>Instructor:</strong> Sir Zuhaib Maqsood<br>
+              <strong>Department:</strong> Computer Science<br>
+              <strong>Institution:</strong> University of Sindh, Jamshoro
+            </p>
+          </div>
+        </div>
+
+        <div class="cover-date-bar">
+          <strong>Submission Date:</strong> 17 November 2026 &bull; Jamshoro, Sindh, Pakistan
+        </div>
+      </div>
+    </article>
+
+    <!-- Page Break after Cover Page -->
+    <div class="page-break"></div>
+
+    <!-- ==========================================================================
+         CONTENT SECTION (PAGE 2+)
+         ========================================================================== -->
+    <div class="report-body-page">
+
+      <!-- SECTION 1 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 01</span>
+          <h3 class="section-title">Business Idea &amp; Platform Used</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          <strong>The Modest Edit</strong> is a digitally native, boutique e-commerce destination tailored specifically for modern young women across Pakistan. The brand fills an acute void in the domestic retail landscape between overpriced designer boutique wear and poor-quality synthetic fast fashion. By unifying curated Modest Fashion (premium chiffon abayas, everyday kimonos, no-pin jersey hijabs), barrier-repair dermatological skincare, and daily lifestyle essentials under an elegant editorial shopping experience, the brand offers accessible luxury grounded in authentic local culture.
+        </p>
+
+        <div class="info-summary-grid">
+          <div class="info-summary-item">
+            <h5>Core Product Pillars</h5>
+            <p>Modest Fashion, Clean Skincare, Cosmetics &amp; Hijabs</p>
+          </div>
+          <div class="info-summary-item">
+            <h5>Target Demographics</h5>
+            <p>Pakistani Women aged 18&ndash;35 (Lahore, Karachi, Islamabad, Hyderabad)</p>
+          </div>
+          <div class="info-summary-item">
+            <h5>Technical Platform</h5>
+            <p>Pure Vanilla HTML5, Modern CSS3 &amp; ES6+ JavaScript (Zero Frameworks)</p>
+          </div>
+        </div>
+
+        <!-- Placeholder 1: Homepage Screenshot -->
+        <div class="image-placeholder-box" id="placeholder-fig-1" data-fig-id="1" data-fig-caption="Figure 1: The Modest Edit — Homepage Hero Banner &amp; Category Grid" tabindex="0" title="Click or Paste (Ctrl+V) to insert your Homepage screenshot">
+          <input type="file" accept="image/*" class="ph-file-input" style="display:none;" id="file-fig-1">
+          <div class="ph-content">
+            <div class="ph-icon">📷</div>
+            <div class="ph-title">[Insert Figure 1: Homepage Screenshot Here]</div>
+            <div class="ph-subtitle">Capture the sticky navbar, editorial hero banner ("Modest. Modern. Mine."), and category cards grid</div>
+            <button type="button" class="ph-upload-cta no-print">📁 Click to Upload Screenshot (or Paste Ctrl+V)</button>
+          </div>
+          <div class="figure-rendered" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- SECTION 2 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 02</span>
+          <h3 class="section-title">Products Catalog</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          The store operates on a tightly curated catalog model designed for high customer confidence and low return rates. Below is the primary commercial catalog featuring product titles, category classification, realistic Pakistani Rupee (PKR) pricing, and detailed use-case descriptions:
+        </p>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 24%;">Product Name</th>
+                <th style="width: 18%;">Category</th>
+                <th style="width: 16%;">Price (PKR)</th>
+                <th style="width: 42%;">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Premium Chiffon Abaya</strong></td>
+                <td><span class="category-badge">Modest Fashion</span></td>
+                <td class="price-cell">Rs. 5,500</td>
+                <td>Flowy, breathable chiffon abaya with minimal embroidery. Perfect for Eid, weddings, and formal gatherings.</td>
+              </tr>
+              <tr>
+                <td><strong>Everyday Kimono</strong></td>
+                <td><span class="category-badge">Modest Fashion</span></td>
+                <td class="price-cell">Rs. 2,800</td>
+                <td>Lightweight kimono for layering over jeans or dresses. Your go-to modest layer for casual university and errand days.</td>
+              </tr>
+              <tr>
+                <td><strong>Jersey Hijab (Pack of 3)</strong></td>
+                <td><span class="category-badge">Accessories</span></td>
+                <td class="price-cell">Rs. 1,800</td>
+                <td>Soft, stretchable jersey hijabs in 3 neutral tones. No pins required; stays securely in place all day long.</td>
+              </tr>
+              <tr>
+                <td><strong>Ceramide Face Wash</strong></td>
+                <td><span class="category-badge">Skincare</span></td>
+                <td class="price-cell">Rs. 1,650</td>
+                <td>Gentle cleanser for sensitive skin, 150ml. Restores skin moisture barrier while gently removing impurities.</td>
+              </tr>
+              <tr>
+                <td><strong>Vitamin C Serum</strong></td>
+                <td><span class="category-badge">Skincare</span></td>
+                <td class="price-cell">Rs. 2,200</td>
+                <td>Brightening antioxidant serum for daily use, 30ml. Fades post-acne dark spots and boosts natural luminous glow.</td>
+              </tr>
+              <tr>
+                <td><strong>Matte Lip Tint</strong></td>
+                <td><span class="category-badge">Cosmetics</span></td>
+                <td class="price-cell">Rs. 950</td>
+                <td>Long-lasting, transfer-proof lip tint. Comfortable velvety matte finish that lasts 8+ hours without drying lips.</td>
+              </tr>
+              <tr>
+                <td><strong>Satin Scrunchie Set</strong></td>
+                <td><span class="category-badge">Accessories</span></td>
+                <td class="price-cell">Rs. 650</td>
+                <td>Set of 3 pure satin scrunchies engineered to prevent friction and hair breakage. Gentle on hair, elegant on wrist.</td>
+              </tr>
+              <tr>
+                <td><strong>Hydrating Sheet Mask</strong></td>
+                <td><span class="category-badge">Skincare</span></td>
+                <td class="price-cell">Rs. 1,100</td>
+                <td>Pack of 5 deeply hydrating sheet masks. Infused with hyaluronic essence for an instant skin glow before events.</td>
+              </tr>
+              <tr>
+                <td><strong>Open Abaya (No Buttons)</strong></td>
+                <td><span class="category-badge">Modest Fashion</span></td>
+                <td class="price-cell">Rs. 4,800</td>
+                <td>Modern open-front flowing abaya designed for contemporary layering. Effortless styling with matching inner slip.</td>
+              </tr>
+              <tr>
+                <td><strong>Mini Travel Pouch</strong></td>
+                <td><span class="category-badge">Accessories</span></td>
+                <td class="price-cell">Rs. 800</td>
+                <td>Compact zipper pouch for cosmetics and everyday accessories. Sits conveniently in any handbag or travel tote.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Placeholder 2: Shop Page Screenshot -->
+        <div class="image-placeholder-box" id="placeholder-fig-2" data-fig-id="2" data-fig-caption="Figure 2: The Modest Edit — Interactive Shop Catalog &amp; Filter System" tabindex="0" title="Click or Paste (Ctrl+V) to insert your Shop Page screenshot">
+          <input type="file" accept="image/*" class="ph-file-input" style="display:none;" id="file-fig-2">
+          <div class="ph-content">
+            <div class="ph-icon">📷</div>
+            <div class="ph-title">[Insert Figure 2: Shop Page Screenshot Here]</div>
+            <div class="ph-subtitle">Capture the dynamic product grid with live price range slider, category checkboxes & Quick View modals</div>
+            <button type="button" class="ph-upload-cta no-print">📁 Click to Upload Screenshot (or Paste Ctrl+V)</button>
+          </div>
+          <div class="figure-rendered" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- SECTION 3 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 03</span>
+          <h3 class="section-title">Differentiation (How We Stand Out)</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          The Modest Edit differentiates itself through four strategic operational pillars. First, a <strong>curated rather than cluttered approach</strong>, intentionally offering a focused capsule of premium products rather than thousands of unvetted SKUs. Second, an <strong>education-first model</strong>, providing free comprehensive buying guides, hijab styling tutorials, and skincare routines for Pakistani weather. Third, a <strong>bundle strategy</strong> presenting curated kits (such as pairing abayas with matching jersey wraps and serums) that offer tangible consumer savings while lifting Average Order Value (AOV). Finally, <strong>hyper-local WhatsApp concierge support</strong> providing instant human guidance on sizing, fabric drape, and order tracking across Pakistan.
+        </p>
+
+        <!-- Placeholder 3: About / Brand Story Screenshot -->
+        <div class="image-placeholder-box" id="placeholder-fig-3" data-fig-id="3" data-fig-caption="Figure 3: The Modest Edit — Brand Story &amp; Strategic Differentiation" tabindex="0" title="Click or Paste (Ctrl+V) to insert your About Page screenshot">
+          <input type="file" accept="image/*" class="ph-file-input" style="display:none;" id="file-fig-3">
+          <div class="ph-content">
+            <div class="ph-icon">📷</div>
+            <div class="ph-title">[Insert Figure 3: About/Brand Story Screenshot Here]</div>
+            <div class="ph-subtitle">Capture the founding narrative, transparent pricing model, and customer differentiation cards</div>
+            <button type="button" class="ph-upload-cta no-print">📁 Click to Upload Screenshot (or Paste Ctrl+V)</button>
+          </div>
+          <div class="figure-rendered" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- Page Break for Clean Printing -->
+      <div class="page-break"></div>
+
+      <!-- SECTION 4 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 04</span>
+          <h3 class="section-title">Marketing Strategy (3 Phases)</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          To build market penetration with disciplined ad spend, The Modest Edit deploys a phased Go-To-Market roadmap spanning 12 operating weeks:
+        </p>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 28%;">Campaign Phase</th>
+                <th style="width: 22%;">Timeline</th>
+                <th style="width: 50%;">Core Execution Tactics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Phase 1: Pre-Launch</strong></td>
+                <td>Weeks 1 &ndash; 4</td>
+                <td>Instagram &amp; TikTok teasers, aesthetic natural-light unboxing reels, micro-influencer PR seeding across top university campuses (LUMS, IBA, Kinnaird, NUST), and private VIP waitlist acquisition.</td>
+              </tr>
+              <tr>
+                <td><strong>Phase 2: Launch &amp; Paid Ads</strong></td>
+                <td>Weeks 5 &ndash; 8</td>
+                <td>Targeted Meta (Facebook &amp; Instagram) Carousel ads highlighting complete fashion capsules, prominent Cash on Delivery trust badges, and an exclusive "FIRST50" order incentive to accelerate initial customer reviews.</td>
+              </tr>
+              <tr>
+                <td><strong>Phase 3: Retargeting &amp; Retention</strong></td>
+                <td>Weeks 9 &ndash; 12</td>
+                <td>Automated WhatsApp broadcast community drops, abandoned cart recovery sequences (recovering up to 22% of dropoffs), and scheduled 45-day skincare replenishment reminders.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- SECTION 5 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 05</span>
+          <h3 class="section-title">Expected Revenue Generation</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          Commercial feasibility is calculated using the foundational direct-to-consumer e-commerce revenue equation:
+        </p>
+
+        <div class="formula-banner">
+          Revenue = Sessions &times; Conversion Rate (CVR) &times; Average Order Value (AOV)
+        </div>
+
+        <div class="financial-projections-grid">
+          <div class="financial-card">
+            <div class="stage-tag">Phase 1 &bull; Conservative Launch</div>
+            <div class="rev-amount">Rs. 37,500</div>
+            <div class="calc-line">
+              <strong>Calculation:</strong> 15 units &times; Rs. 2,500 AOV<br>
+              Driven by early organic waitlists, close network seeding, and word-of-mouth validation.
+            </div>
+          </div>
+
+          <div class="financial-card highlight">
+            <div class="stage-tag">Phase 3 &bull; Growth Target</div>
+            <div class="rev-amount">Rs. 90,000</div>
+            <div class="calc-line">
+              <strong>Calculation:</strong> 2,400 sessions &times; 1.5% CVR = 36 orders &times; Rs. 2,500 AOV<br>
+              Driven by optimized Meta retargeting ads, TikTok lookbooks, and repeat skincare replenishment re-orders.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 06</span>
+          <h3 class="section-title">Audience Interest Analysis (Ubersuggest Data)</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          To evaluate authentic digital demand across Pakistan, empirical keyword research was conducted using <strong>Ubersuggest</strong> for the Pakistan territory. The data reveals robust consumer search volume paired with exceptionally low SEO competition:
+        </p>
+
+        <div class="table-container">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Keyword Search Query</th>
+                <th>Monthly Search Volume</th>
+                <th>SEO Difficulty</th>
+                <th>Search Intent</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>abaya online pakistan</strong></td>
+                <td>1,600</td>
+                <td>19 (Low)</td>
+                <td><span class="badge-commercial">Commercial</span></td>
+              </tr>
+              <tr>
+                <td><strong>vitamin c serum pakistan</strong></td>
+                <td>880</td>
+                <td>7 (Low)</td>
+                <td><span class="badge-transactional">Transactional</span></td>
+              </tr>
+              <tr>
+                <td><strong>hair serum pakistan</strong></td>
+                <td>140</td>
+                <td>21 (Low)</td>
+                <td><span class="badge-commercial">Commercial</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="lead-paragraph" style="font-size: 10pt; color: var(--text-muted); margin-top: 8px;">
+          <em>Analysis:</em> The flagship keyword <code>abaya online pakistan</code> captures 1,600 monthly searches with a low difficulty rating of 19. Similarly, <code>vitamin c serum pakistan</code> commands an impressive transactional intent with 880 monthly searches and an SEO difficulty score of only 7. Because all targeted terms exhibit low competition, The Modest Edit can secure top-page organic ranking rapidly through on-page keyword placement and editorial styling guides.
+        </p>
+
+        <!-- Placeholders 4, 5, 6: Ubersuggest Screenshots -->
+        <div class="triple-placeholder-grid">
+          <div class="image-placeholder-box" id="placeholder-fig-4" data-fig-id="4" data-fig-caption="Figure 4: Ubersuggest Pakistan — 'abaya online pakistan' (Volume: 1,600 | SD: 19)" tabindex="0" title="Click or Paste (Ctrl+V) to insert Ubersuggest abaya screenshot">
+            <input type="file" accept="image/*" class="ph-file-input" style="display:none;" id="file-fig-4">
+            <div class="ph-content">
+              <div class="ph-icon">📊</div>
+              <div class="ph-title">[Figure 4: Abaya Search]</div>
+              <div class="ph-subtitle">Volume: 1,600 | SD: 19</div>
+              <button type="button" class="ph-upload-cta no-print">📁 Upload / Paste</button>
+            </div>
+            <div class="figure-rendered" style="display:none;"></div>
+          </div>
+
+          <div class="image-placeholder-box" id="placeholder-fig-5" data-fig-id="5" data-fig-caption="Figure 5: Ubersuggest Pakistan — 'vitamin c serum pakistan' (Volume: 880 | SD: 7)" tabindex="0" title="Click or Paste (Ctrl+V) to insert Ubersuggest vitamin c serum screenshot">
+            <input type="file" accept="image/*" class="ph-file-input" style="display:none;" id="file-fig-5">
+            <div class="ph-content">
+              <div class="ph-icon">📊</div>
+              <div class="ph-title">[Figure 5: Vit-C Search]</div>
+              <div class="ph-subtitle">Volume: 880 | SD: 7</div>
+              <button type="button" class="ph-upload-cta no-print">📁 Upload / Paste</button>
+            </div>
+            <div class="figure-rendered" style="display:none;"></div>
+          </div>
+
+          <div class="image-placeholder-box" id="placeholder-fig-6" data-fig-id="6" data-fig-caption="Figure 6: Ubersuggest Pakistan — 'hair serum pakistan' (Volume: 140 | SD: 21)" tabindex="0" title="Click or Paste (Ctrl+V) to insert Ubersuggest hair serum screenshot">
+            <input type="file" accept="image/*" class="ph-file-input" style="display:none;" id="file-fig-6">
+            <div class="ph-content">
+              <div class="ph-icon">📊</div>
+              <div class="ph-title">[Figure 6: Hair Serum Search]</div>
+              <div class="ph-subtitle">Volume: 140 | SD: 21</div>
+              <button type="button" class="ph-upload-cta no-print">📁 Upload / Paste</button>
+            </div>
+            <div class="figure-rendered" style="display:none;"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7 -->
+      <section class="section-block">
+        <div class="section-header">
+          <span class="section-num">Section 07</span>
+          <h3 class="section-title">Areas of Success (KPIs)</h3>
+        </div>
+
+        <p class="lead-paragraph">
+          The business performance is tracked across four core operational Key Performance Indicators:
+        </p>
+
+        <div class="kpi-cards-grid">
+          <div class="kpi-card-box">
+            <div class="kpi-num">KPI 01</div>
+            <div class="kpi-heading">High Repeat Purchase Rate</div>
+            <div class="kpi-details">
+              Over 42% of first-time purchasers place a second order within 90 days, fueled by recurring skincare replenishment and seasonal hijab color drops.
+            </div>
+          </div>
+
+          <div class="kpi-card-box">
+            <div class="kpi-num">KPI 02</div>
+            <div class="kpi-heading">Strong LTV : CAC Ratio (3:1)</div>
+            <div class="kpi-details">
+              Customer Lifetime Value (Rs. 8,200) significantly outpaces Customer Acquisition Cost (Rs. 2,650) due to organic social sharing and high retention.
+            </div>
+          </div>
+
+          <div class="kpi-card-box">
+            <div class="kpi-num">KPI 03</div>
+            <div class="kpi-heading">High Average Order Value (Rs. 3,000+)</div>
+            <div class="kpi-details">
+              Our free express shipping threshold at Rs. 3,000 incentivizes customers to bundle abayas with hijabs or cleansers, lifting multi-item basket sizes.
+            </div>
+          </div>
+
+          <div class="kpi-card-box">
+            <div class="kpi-num">KPI 04</div>
+            <div class="kpi-heading">Niche Category Authority</div>
+            <div class="kpi-details">
+              Achieving trusted authority status among university students and young working executives seeking breathable, modest, and modern apparel in Pakistan.
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Helper function to render image inside a placeholder
+      function renderFigure(box, dataUrl, captionText) {
+        box.classList.add('has-image');
+        const phContent = box.querySelector('.ph-content');
+        const rendered = box.querySelector('.figure-rendered');
+        if (phContent) phContent.style.display = 'none';
+        if (rendered) {
+          rendered.style.display = 'flex';
+          rendered.innerHTML = `
+            <img src="${dataUrl}" class="figure-img" alt="${captionText}">
+            <div class="figure-caption">${captionText}</div>
+            <div class="figure-actions no-print">
+              <button type="button" class="figure-btn btn-change">🔄 Change Image</button>
+              <button type="button" class="figure-btn btn-remove">🗑️ Remove Image</button>
+            </div>
+          `;
+
+          // Change button triggers file input
+          rendered.querySelector('.btn-change').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const input = box.querySelector('.ph-file-input');
+            if (input) input.click();
+          });
+
+          // Remove button clears image & resets placeholder
+          rendered.querySelector('.btn-remove').addEventListener('click', (e) => {
+            e.stopPropagation();
+            const figId = box.dataset.figId;
+            try { localStorage.removeItem('tme_fig_' + figId); } catch(err){}
+            box.classList.remove('has-image');
+            rendered.style.display = 'none';
+            rendered.innerHTML = '';
+            if (phContent) phContent.style.display = 'flex';
+            const input = box.querySelector('.ph-file-input');
+            if (input) input.value = '';
+          });
+        }
+      }
+
+      // Process image file
+      function processFile(file, box) {
+        if (!file || !file.type.startsWith('image/')) return;
+        const figId = box.dataset.figId;
+        const caption = box.dataset.figCaption;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const dataUrl = e.target.result;
+          try {
+            localStorage.setItem('tme_fig_' + figId, dataUrl);
+          } catch(err) {
+            console.warn('LocalStorage limit exceeded, displaying without caching', err);
+          }
+          renderFigure(box, dataUrl, caption);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // Initialize all placeholder boxes
+      const boxes = document.querySelectorAll('.image-placeholder-box');
+      boxes.forEach(box => {
+        const figId = box.dataset.figId;
+        const caption = box.dataset.figCaption;
+        const input = box.querySelector('.ph-file-input');
+
+        // Restore cached image from localStorage
+        try {
+          const saved = localStorage.getItem('tme_fig_' + figId);
+          if (saved) {
+            renderFigure(box, saved, caption);
+          }
+        } catch(e) {}
+
+        // Click to upload
+        box.addEventListener('click', (e) => {
+          if (!box.classList.contains('has-image') || e.target.closest('.ph-upload-cta')) {
+            if (input) input.click();
+          }
+        });
+
+        // File input changed
+        if (input) {
+          input.addEventListener('change', () => {
+            if (input.files && input.files[0]) {
+              processFile(input.files[0], box);
+            }
+          });
+        }
+
+        // Drag and Drop
+        box.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          box.classList.add('drag-over');
+        });
+        box.addEventListener('dragleave', () => {
+          box.classList.remove('drag-over');
+        });
+        box.addEventListener('drop', (e) => {
+          e.preventDefault();
+          box.classList.remove('drag-over');
+          if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+            processFile(e.dataTransfer.files[0], box);
+          }
+        });
+
+        // Paste (Ctrl + V) when box has focus
+        box.addEventListener('paste', (e) => {
+          const items = (e.clipboardData || window.clipboardData).items;
+          for (let i = 0; i < items.length; i++) {
+            if (items[i].type.indexOf('image') !== -1) {
+              const blob = items[i].getAsFile();
+              processFile(blob, box);
+              e.preventDefault();
+              break;
+            }
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>
