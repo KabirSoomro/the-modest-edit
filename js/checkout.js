@@ -73,17 +73,26 @@ function initCheckoutPage() {
       date: new Date().toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' })
     };
 
-    // 1.5s simulated network delay
-    setTimeout(() => {
-      // Clear Cart
-      clearCart();
+    // Save to Firebase Cloud Backend & display confirmation modal
+    (async () => {
+      try {
+        if (typeof saveOrderToFirebase === 'function') {
+          await saveOrderToFirebase(orderData);
+          console.log('✅ Order successfully saved to Firebase Backend:', orderData.orderId);
+        }
+      } catch (fbErr) {
+        console.warn('Firebase order sync notice:', fbErr);
+      } finally {
+        // Clear Cart
+        clearCart();
 
-      // Show Full-Screen Success Modal
-      showOrderSuccessModal(orderData);
+        // Show Full-Screen Success Modal
+        showOrderSuccessModal(orderData);
 
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalText;
-    }, 1500);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalText;
+      }
+    })();
   });
 
   // Attach live input validation listeners

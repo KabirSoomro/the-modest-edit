@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Operations Hub — The Modest Edit | Real-time Firebase Orders</title>
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #8B6F47;
+      --primary-dark: #6D5636;
+      --secondary: #A3B18A;
+      --bg-cream: #F5EFE6;
+      --text-charcoal: #2D2D2D;
+      --text-muted: #666666;
+      --accent-gold: #C9A961;
+      --white: #FFFFFF;
+      --border-color: #E8DFD5;
+      --status-pending: #E08700;
+      --status-confirmed: #1D6FB8;
+      --status-dispatched: #7A3E9D;
+      --status-delivered: #2B8A3E;
+      --status-cancelled: #C92A2A;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background: #FDFBF8;
+      color: var(--text-charcoal);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+
+    /* Top Admin Header */
+    .admin-header {
+      background: #FFFFFF;
+      border-bottom: 1px solid var(--border-color);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    }
+
+    .admin-nav {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .brand-title {
+      font-family: var(--font-serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .admin-badge {
+      background: var(--bg-cream);
+      color: var(--primary-dark);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border: 1px solid var(--border-color);
+    }
+
+    .backend-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #EBFBEE;
+      color: #2B8A3E;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid #D3F9D8;
+    }
+
+    .backend-pill .dot {
+      width: 8px;
+      height: 8px;
+      background: #2B8A3E;
+      border-radius: 50%;
+      animation: pulse 1.8s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      50% { transform: scale(1.3); opacity: 1; }
+      100% { transform: scale(0.9); opacity: 0.7; }
+    }
+
+    .nav-links-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-outline {
+      background: #FFFFFF;
+      border-color: var(--border-color);
+      color: var(--text-charcoal);
+    }
+
+    .btn-outline:hover {
+      background: var(--bg-cream);
+      border-color: var(--primary);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: #FFFFFF;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Main Container */
+    .admin-main {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 28px 24px 60px;
+    }
+
+    .portal-banner {
+      margin-bottom: 24px;
+    }
+
+    .portal-banner h1 {
+      font-family: var(--font-serif);
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      margin-bottom: 4px;
+    }
+
+    .portal-banner p {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+
+    /* Metrics Grid */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--primary);
+    }
+
+    .metric-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .metric-value {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-charcoal);
+      font-family: var(--font-serif);
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Operations Control Bar */
+    .controls-bar {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .search-filter-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 320px;
+      padding: 9px 14px;
+      font-size: 13px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-input:focus {
+      border-color: var(--primary);
+    }
+
+    .filter-select {
+      padding: 9px 14px;
+      font-size: 13px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: #FFFFFF;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .filter-select:focus {
+      border-color: var(--primary);
+    }
+
+    .actions-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Orders Table */
+    .table-card {
+      background: #FFFFFF;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .orders-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .orders-table th {
+      background: var(--bg-cream);
+      padding: 14px 18px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      color: var(--primary-dark);
+      border-bottom: 1px solid var(--border-color);
+      white-space: nowrap;
+    }
+
+    .orders-table td {
+      padding: 16px 18px;
+      border-bottom: 1px solid #F0EBE5;
+      vertical-align: middle;
+    }
+
+    .orders-table tr:hover {
+      background: #FDFBF8;
+    }
+
+    .order-id-badge {
+      font-weight: 700;
+      color: var(--primary);
+      font-family: monospace;
+      font-size: 13px;
+    }
+
+    .customer-info strong {
+      display: block;
+      color: var(--text-charcoal);
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .customer-info span {
+      display: block;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #E8F7EE;
+      color: #1F7A3F;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      text-decoration: none;
+      margin-top: 4px;
+      border: 1px solid #C7EDD4;
+    }
+
+    .whatsapp-btn:hover {
+      background: #25D366;
+      color: #FFFFFF;
+      border-color: #25D366;
+    }
+
+    .items-summary {
+      max-width: 280px;
+    }
+
+    .item-chip {
+      display: inline-block;
+      background: #F4EFE6;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin: 2px 2px 2px 0;
+      color: var(--text-charcoal);
+    }
+
+    .price-total {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-charcoal);
+      white-space: nowrap;
+    }
+
+    .status-select {
+      padding: 6px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid transparent;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .status-select.pending {
+      background: #FFF4E6;
+      color: var(--status-pending);
+      border-color: #FFE0B2;
+    }
+
+    .status-select.confirmed {
+      background: #E7F5FF;
+      color: var(--status-confirmed);
+      border-color: #C5E6FF;
+    }
+
+    .status-select.dispatched {
+      background: #F3E8FF;
+      color: var(--status-dispatched);
+      border-color: #E2C7FF;
+    }
+
+    .status-select.delivered {
+      background: #EBFBEE;
+      color: var(--status-delivered);
+      border-color: #C8F5CC;
+    }
+
+    .status-select.cancelled {
+      background: #FFE3E3;
+      color: var(--status-cancelled);
+      border-color: #FFC9C9;
+    }
+
+    /* Empty State */
+    .empty-orders {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-muted);
+    }
+
+    .empty-icon {
+      font-size: 44px;
+      margin-bottom: 12px;
+    }
+
+    .empty-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-charcoal);
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Admin Sticky Header -->
+  <header class="admin-header">
+    <div class="admin-nav">
+      <a href="index.html" class="admin-brand">
+        <span class="brand-title">The Modest Edit</span>
+        <span class="admin-badge">Admin Portal</span>
+      </a>
+
+      <div class="backend-pill" id="backendPill">
+        <span class="dot"></span>
+        <span>Firebase Cloud Backend: Connected</span>
+      </div>
+
+      <div class="nav-links-right">
+        <a href="index.html" class="btn btn-outline" target="_blank">🌐 View Store</a>
+        <a href="checkout.html" class="btn btn-outline" target="_blank">🛒 Test Checkout</a>
+        <a href="assignment.html" class="btn btn-outline" target="_blank">📄 Assignment Report</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <div class="portal-banner">
+      <h1>Operations Hub &amp; Real-time Orders</h1>
+      <p>Live order synchronization powered by Google Firebase Cloud Firestore (Project: <code>the-modest-edit</code>).</p>
+    </div>
+
+    <!-- Live Metrics Grid -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total Orders</div>
+        <div class="metric-value" id="metricTotalOrders">0</div>
+        <div class="metric-sub">Across Pakistan</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Gross Revenue</div>
+        <div class="metric-value" id="metricRevenue">Rs. 0</div>
+        <div class="metric-sub">Verified Cash on Delivery</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Pending Fulfillment</div>
+        <div class="metric-value" id="metricPending" style="color: var(--status-pending);">0</div>
+        <div class="metric-sub">Awaiting Dispatch</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Completed Deliveries</div>
+        <div class="metric-value" id="metricDelivered" style="color: var(--status-delivered);">0</div>
+        <div class="metric-sub">Delivered &amp; Paid</div>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="controls-bar">
+      <div class="search-filter-group">
+        <input type="text" id="orderSearchInput" class="search-input" placeholder="Search by Order ID, Name, Phone or City...">
+        <select id="statusFilterSelect" class="filter-select">
+          <option value="all">All Statuses</option>
+          <option value="Pending">Pending</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Dispatched">Dispatched</option>
+          <option value="Delivered">Delivered</option>
+          <option value="Cancelled">Cancelled</option>
+        </select>
+      </div>
+
+      <div class="actions-group">
+        <button type="button" class="btn btn-outline" id="btnCreateSampleOrder">➕ Create Demo Order</button>
+        <button type="button" class="btn btn-primary" id="btnExportCSV">📥 Export CSV</button>
+      </div>
+    </div>
+
+    <!-- Orders Table Card -->
+    <div class="table-card">
+      <div class="table-responsive">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Date &amp; Time</th>
+              <th>Customer Details</th>
+              <th>Items Ordered</th>
+              <th>Total Bill</th>
+              <th>Live Status</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Dynamically populated via Firebase -->
+          </tbody>
+        </table>
+      </div>
+      <div id="emptyOrdersState" class="empty-orders" style="display: none;">
+        <div class="empty-icon">📦</div>
+        <div class="empty-title">No orders found</div>
+        <p>Go to <a href="shop.html" target="_blank" style="color: var(--primary);">Shop</a> and checkout on <a href="checkout.html" target="_blank" style="color: var(--primary);">checkout.html</a> or click "Create Demo Order" above.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+
+  <!-- Admin Script Logic -->
+  <script>
+    let allOrders = [];
+
+    document.addEventListener('DOMContentLoaded', () => {
+      initAdminDashboard();
+    });
+
+    function initAdminDashboard() {
+      const searchInput = document.getElementById('orderSearchInput');
+      const filterSelect = document.getElementById('statusFilterSelect');
+      const btnSample = document.getElementById('btnCreateSampleOrder');
+      const btnExport = document.getElementById('btnExportCSV');
+
+      // Listen for orders in real time from Firebase
+      if (typeof listenToOrders === 'function') {
+        listenToOrders((orders) => {
+          allOrders = orders || [];
+          renderOrders();
+          updateMetrics();
+        });
+      }
+
+      // Filter & Search events
+      searchInput.addEventListener('input', renderOrders);
+      filterSelect.addEventListener('change', renderOrders);
+
+      // Create Demo Order button
+      btnSample.addEventListener('click', async () => {
+        const sampleOrder = {
+          orderId: 'TME-' + Math.floor(1000 + Math.random() * 9000),
+          fullName: 'Areeba Siddiqui',
+          phone: '0316-8465697',
+          email: 'areeba.sample@gmail.com',
+          address: 'House #42, Street 8, Defence Phase 5',
+          city: 'Karachi',
+          postalCode: '75500',
+          notes: 'Please ring bell twice upon arrival',
+          subtotal: 7300,
+          shipping: 0,
+          total: 7300,
+          status: 'Pending',
+          items: [
+            { name: 'Premium Chiffon Abaya', price: 5500, quantity: 1, size: 'M' },
+            { name: 'Jersey Hijab (Pack of 3)', price: 1800, quantity: 1, size: 'One Size' }
+          ],
+          date: new Date().toLocaleDateString('en-PK', { day: 'numeric', month: 'short', year: 'numeric' })
+        };
+
+        if (typeof saveOrderToFirebase === 'function') {
+          await saveOrderToFirebase(sampleOrder);
+        }
+      });
+
+      // Export CSV
+      btnExport.addEventListener('click', () => {
+        if (allOrders.length === 0) {
+          alert('No orders to export.');
+          return;
+        }
+
+        let csvContent = 'data:text/csv;charset=utf-8,';
+        csvContent += 'Order ID,Date,Customer Name,Phone,City,Address,Total (PKR),Status,Items\n';
+
+        allOrders.forEach(o => {
+          const itemsStr = (o.items || []).map(i => `${i.name} (${i.quantity || 1})`).join('; ');
+          csvContent += `"${o.orderId || o.id}","${o.date || ''}","${o.fullName || ''}","${o.phone || ''}","${o.city || ''}","${(o.address || '').replace(/"/g, '""')}","${o.total || 0}","${o.status || 'Pending'}","${itemsStr}"\n`;
+        });
+
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement('a');
+        link.setAttribute('href', encodedUri);
+        link.setAttribute('download', `The_Modest_Edit_Orders_${Date.now()}.csv`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+    }
+
+    function renderOrders() {
+      const tbody = document.getElementById('ordersTableBody');
+      const emptyState = document.getElementById('emptyOrdersState');
+      const query = document.getElementById('orderSearchInput').value.toLowerCase().trim();
+      const statusFilter = document.getElementById('statusFilterSelect').value;
+
+      const filtered = allOrders.filter(o => {
+        const matchesStatus = statusFilter === 'all' || (o.status || 'Pending') === statusFilter;
+        const matchesQuery = !query || 
+          (o.orderId && o.orderId.toLowerCase().includes(query)) ||
+          (o.fullName && o.fullName.toLowerCase().includes(query)) ||
+          (o.phone && o.phone.toLowerCase().includes(query)) ||
+          (o.city && o.city.toLowerCase().includes(query));
+        return matchesStatus && matchesQuery;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '';
+        emptyState.style.display = 'block';
+        return;
+      }
+
+      emptyState.style.display = 'none';
+      tbody.innerHTML = filtered.map(order => {
+        const orderId = order.orderId || order.id || 'N/A';
+        const cleanPhone = (order.phone || '').replace(/[^0-9]/g, '');
+        const waPhone = cleanPhone.startsWith('0') ? '92' + cleanPhone.substring(1) : (cleanPhone.startsWith('92') ? cleanPhone : '92' + cleanPhone);
+        const waText = encodeURIComponent(`Assalam-o-Alaikum ${order.fullName || 'Valued Customer'}, this is Kabir from The Modest Edit regarding your order #${orderId}.`);
+
+        const itemsHtml = (order.items && order.items.length) 
+          ? order.items.map(it => `<span class="item-chip">${it.name} &times; ${it.quantity || 1}</span>`).join('')
+          : '<span class="item-chip">General Package</span>';
+
+        const statusClass = (order.status || 'pending').toLowerCase();
+
+        return `
+          <tr>
+            <td>
+              <span class="order-id-badge">#${orderId}</span>
+            </td>
+            <td>
+              <span style="font-size: 12px; color: var(--text-muted);">${order.date || 'Recent'}</span>
+            </td>
+            <td>
+              <div class="customer-info">
+                <strong>${order.fullName || 'Guest Customer'}</strong>
+                <span>📍 ${order.city || 'Pakistan'}, ${order.address || ''}</span>
+                <span>📞 ${order.phone || 'N/A'}</span>
+                <a href="https://wa.me/${waPhone}?text=${waText}" target="_blank" class="whatsapp-btn">
+                  💬 WhatsApp Customer
+                </a>
+              </div>
+            </td>
+            <td>
+              <div class="items-summary">${itemsHtml}</div>
+            </td>
+            <td>
+              <span class="price-total">Rs. ${(order.total || 0).toLocaleString()}</span>
+            </td>
+            <td>
+              <select class="status-select ${statusClass}" onchange="changeStatus('${orderId}', this.value, this)">
+                <option value="Pending" ${order.status === 'Pending' ? 'selected' : ''}>⏳ Pending</option>
+                <option value="Confirmed" ${order.status === 'Confirmed' ? 'selected' : ''}>✔️ Confirmed</option>
+                <option value="Dispatched" ${order.status === 'Dispatched' ? 'selected' : ''}>🚚 Dispatched</option>
+                <option value="Delivered" ${order.status === 'Delivered' ? 'selected' : ''}>🎉 Delivered</option>
+                <option value="Cancelled" ${order.status === 'Cancelled' ? 'selected' : ''}>❌ Cancelled</option>
+              </select>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function updateMetrics() {
+      document.getElementById('metricTotalOrders').textContent = allOrders.length;
+      
+      const revenue = allOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+      document.getElementById('metricRevenue').textContent = 'Rs. ' + revenue.toLocaleString();
+
+      const pending = allOrders.filter(o => !o.status || o.status === 'Pending').length;
+      document.getElementById('metricPending').textContent = pending;
+
+      const delivered = allOrders.filter(o => o.status === 'Delivered').length;
+      document.getElementById('metricDelivered').textContent = delivered;
+    }
+
+    async function changeStatus(orderId, newStatus, selectEl) {
+      selectEl.className = 'status-select ' + newStatus.toLowerCase();
+      if (typeof updateOrderStatus === 'function') {
+        await updateOrderStatus(orderId, newStatus);
+      }
+      // Update local memory
+      const target = allOrders.find(o => (o.orderId || o.id) === orderId);
+      if (target) {
+        target.status = newStatus;
+        updateMetrics();
+      }
+    }
+  </script>
+</body>
+</html>
